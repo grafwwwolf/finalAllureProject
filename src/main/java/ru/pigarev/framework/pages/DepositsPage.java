@@ -1,5 +1,6 @@
 package ru.pigarev.framework.pages;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -43,6 +44,7 @@ public class DepositsPage extends BasePage {
     private WebElement calcResult;
 
 
+    @Step("Клик на выбор валюты. Хранится в currency '{deposit}'")
     public DepositsPage chooseCurrency(Deposit deposit) {
         String currency = deposit.getCurrency();
         for (WebElement element : CurrencyList) {
@@ -57,36 +59,30 @@ public class DepositsPage extends BasePage {
         return this;
     }
 
+    @Step("Заполнение поля 'Сумма вклада'. Значением Хранится в sumOfBankProduct '{deposit}'")
     public DepositsPage fillDepositSum(Deposit deposit) {
         String value = deposit.getSumOfBankProduct();
         fillInputField(depositSumBlock.findElement(By.xpath("./input")), value);
         return this;
     }
 
+    @Step("Выбор срока вклада. Значением Хранится в termInMonth '{deposit}'")
     public DepositsPage selectDepositTerm(Deposit deposit) {
         Integer term = deposit.getTermInMonth();
-//        waitUtilElementToBeClickable(depositTerm).click();
-//        Assertions.assertTrue(depositTerm.findElement(By.xpath("./../..")).getAttribute("class").contains("opened"), "Меню выбора срока вклада не открылось");
-//        for (WebElement element : depositTermList) {
-//            String text = element.getText();
-//            if (stringToInt(text) == term) {
-//                System.out.println(text);
-//                waitUtilElementToBeClickable(element).click();
-//                return;
-//            }
-//        }
         Select select = new Select(driverManager.getDriver().findElement(By.xpath("//select[@class=\"calculator__slide-input js-slide-value\"]")));
         select.selectByValue(term.toString());
         Assertions.assertEquals(stringToInt(depositTerm.getText()), term, "Выбранный срок вклада не совпадает с искомым сроком.");
         return this;
     }
 
+    @Step("Заполнение поля 'Ежемесячное пополнение'. Значением Хранится в monthlyReplenishment '{deposit}'")
     public DepositsPage fillMonthlyReplenishment(Deposit deposit) {
         String value = deposit.getMonthlyReplenishment();
         fillInputField(monthlyReplenishment, value);
         return this;
     }
 
+    @Step("Выбор 'Ежемесячной капитализации'. Значение 'true' либо  'false' хранится в monthlyCapitalization '{deposit}'")
     public DepositsPage monthlyCapitalization(Deposit deposit) {
         if (deposit.isMonthlyCapitalization()) {
             waitUtilElementToBeClickable(monthlyCapitalization).click();
@@ -95,6 +91,8 @@ public class DepositsPage extends BasePage {
         return this;
     }
 
+    @Step("Проверка полученных расчетов полей 'Начислено %', 'Пополнение на указанный срок депозита', 'Снятие после указанного срока депозита'." +
+            "Значения хранятся соответственно в calcEarned, calcReplenish, calcResult '{deposit}'")
     public DepositsPage checkCalc(Deposit deposit) {
         String valueEarned = deposit.getCalcEarned();
         String valueReplenish = deposit.getCalcReplenish();

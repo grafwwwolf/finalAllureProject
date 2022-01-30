@@ -28,6 +28,7 @@ public class Deposit extends BankProduct {
         return calcResult;
     }
 
+
     public Deposit(String currency, String currencyAbb, String sumOfBankProduct, Integer termInMonth,
                    String monthlyReplenishment, boolean monthlyCapitalization, String calcEarned, String calcReplenish, String calcResult) {
         super(currency, currencyAbb, sumOfBankProduct, termInMonth);
@@ -37,7 +38,21 @@ public class Deposit extends BankProduct {
         this.calcEarned = calcEarned;
         this.calcReplenish = calcReplenish;
         this.calcResult = calcResult;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Deposit{" +
+                "monthlyReplenishment='" + monthlyReplenishment + '\'' +
+                ", monthlyCapitalization=" + monthlyCapitalization +
+                ", calcEarned='" + calcEarned + '\'' +
+                ", calcReplenish='" + calcReplenish + '\'' +
+                ", calcResult='" + calcResult + '\'' +
+                ", name='" + name + '\'' +
+                ", currency='" + currency + '\'' +
+                ", currencyAbb='" + currencyAbb + '\'' +
+                ", sumOfBankProduct='" + sumOfBankProduct + '\'' +
+                ", termInMonth=" + termInMonth +
+                '}';
     }
 }

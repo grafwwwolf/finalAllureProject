@@ -28,7 +28,7 @@
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
         <aspectj.version>1.9.5</aspectj.version>
-        <tests>firstTest</tests>
+        <tests>All</tests>
 
 
     </properties>
@@ -131,7 +131,7 @@
                         </allure.results.directory>
                     </systemPropertyVariables>
 
-                    <groups>${tests}</groups>
+<!--                    <groups>${tests}</groups>-->
 
                 </configuration>
 

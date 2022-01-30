@@ -18,7 +18,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[@class=\"nav__link\" and contains(text(), \"Калькулятор доходности\")]")
     private WebElement profitabilityCalculator;
 
-    @Step("Кликаем на меню ")
+    @Step("Клик на меню выбора банковсокого продукта. Хранится в name '{product}'")
     public HomePage chooseServiceFromTopMenu(BankProduct product) {
         String serviceName = product.getName();
         for (WebElement element : serviceTopMenu) {
@@ -32,6 +32,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    @Step("Клик на 'Калькулятор доходности'")
     public DepositsPage chooseProfitabilityCalculator() {
         waitUtilElementToBeClickable(profitabilityCalculator).click();
         wait.until(ExpectedConditions.titleContains("Вклады"));
